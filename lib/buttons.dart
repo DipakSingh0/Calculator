@@ -17,7 +17,8 @@ class MyButtons extends StatelessWidget {
     // var screenHeight = screenSize.height;
     return Padding(
       padding: const EdgeInsets.all(1.0),
-      child: GestureDetector(
+      child: InkWell(
+        splashColor: Colors.grey[100],
         onTap: buttonTapped,
         child: ClipRRect(
           // borderRadius: BorderRadius.circular(10),
