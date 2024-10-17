@@ -38,20 +38,24 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
+    final backgroundColor = const Color(0xFFE7ECEF);
     return Scaffold(
-      backgroundColor: Colors.grey[300],
+      backgroundColor: backgroundColor,
       appBar: AppBar(
-        backgroundColor: Colors.grey[300],
-        title: Center(child: Text('Calculator', style: TextStyle(color: Colors.black , fontSize: 30),))
-      ),
+          backgroundColor: backgroundColor,
+          title: const Center(
+              child: Text(
+            'Calculator',
+            style: TextStyle(color: Colors.black, fontSize: 30),
+          ))),
       body: Column(children: [
         // Input/Output container
         Expanded(
             child: Padding(
-              padding: const EdgeInsets.all(20.0),
-              child: Column(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        children: [
+          padding: const EdgeInsets.all(20.0),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
               Container(
                   alignment: Alignment.centerRight,
                   // color: Colors.grey[500],
@@ -66,9 +70,9 @@ class _HomePageState extends State<HomePage> {
                     userAnswer,
                     style: TextStyle(fontSize: 55),
                   )),
-                        ],
-                      ),
-            )),
+            ],
+          ),
+        )),
 
         Container(
           height: 5,
@@ -80,10 +84,9 @@ class _HomePageState extends State<HomePage> {
             child: Padding(
               padding: const EdgeInsets.all(8.0),
               child: GridView.builder(
-                // mainAxisSize: MainAxisSize.min,
+                  // mainAxisSize: MainAxisSize.min,
                   itemCount: button.length,
-                  gridDelegate:
-                      const SliverGridDelegateWithFixedCrossAxisCount(
+                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                     crossAxisCount: 4,
                     mainAxisSpacing: 4,
                     crossAxisSpacing: 4,
@@ -99,7 +102,6 @@ class _HomePageState extends State<HomePage> {
                             userAnswer = '';
                           });
                         },
-                        
                       );
                     }
                     // DElETE button to delete the part
@@ -109,11 +111,10 @@ class _HomePageState extends State<HomePage> {
                           buttonTapped: () {
                             setState(
                               () {
-                                if (userQuestion.length > 0){
+                                if (userQuestion.length > 0) {
                                   userQuestion = userQuestion.substring(
                                       0, userQuestion.length - 1);
-                                }
-                                else {
+                                } else {
                                   userAnswer = userAnswer.substring(
                                       0, userAnswer.length - 1);
                                 }
@@ -121,7 +122,7 @@ class _HomePageState extends State<HomePage> {
                             );
                           });
                     }
-            
+
                     //answer button
                     else if (index == button.length - 2) {
                       return MyButtons(
@@ -141,22 +142,19 @@ class _HomePageState extends State<HomePage> {
                         buttonText: button[index],
                         buttonTapped: () {
                           setState(() {
-                              String finalQuestion = userQuestion;
-                              finalQuestion =
-                                  finalQuestion.replaceAll('x', '*');
-                              Parser p = Parser();
-                              Expression exp = p.parse(finalQuestion);
-                              ContextModel cm = ContextModel();
-                              double eval =
-                                  exp.evaluate(EvaluationType.REAL, cm);
-            
-                              userAnswer = eval.toString();
-                            }
-                          );
+                            String finalQuestion = userQuestion;
+                            finalQuestion = finalQuestion.replaceAll('x', '*');
+                            Parser p = Parser();
+                            Expression exp = p.parse(finalQuestion);
+                            ContextModel cm = ContextModel();
+                            double eval = exp.evaluate(EvaluationType.REAL, cm);
+
+                            userAnswer = eval.toString();
+                          });
                         },
                       );
                     }
-            
+
                     //other buttons
                     else {
                       return MyButtons(
